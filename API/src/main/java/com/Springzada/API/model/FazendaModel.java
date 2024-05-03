@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class FazendaModel implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nome;
     private float area;
