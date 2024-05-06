@@ -21,9 +21,14 @@ public class FazendaService {
         return repository.save(fazendaModel);
     }
 
-    // Read all Fazendas
+    // Get all Fazendas
     public List<FazendaModel> getFazendas() {
         return repository.findAll();
+    }
+
+    // Get one Fazenda by name
+    public FazendaModel getFazenda(String nome) {
+        return repository.findByNome(nome);
     }
 
 }
