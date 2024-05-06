@@ -16,19 +16,38 @@ public class FazendaService {
 
     // Create a new Fazenda
     public FazendaModel saveFazenda(FazendaRecord fazenda) {
+
         var fazendaModel = new FazendaModel();
         BeanUtils.copyProperties(fazenda, fazendaModel);
         return repository.save(fazendaModel);
+
     }
 
     // Get all Fazendas
     public List<FazendaModel> getFazendas() {
+
         return repository.findAll();
+
     }
 
     // Get one Fazenda by name
     public FazendaModel getFazenda(String nome) {
+
         return repository.findByNome(nome);
+        
+    }
+
+    // Edit one Fazenda by name
+    public FazendaModel editFazenda(String nome, FazendaRecord fazenda) {
+
+        var fazendaModel = repository.findByNome(nome);
+
+        if (fazendaModel == null) {
+            return null;
+        }
+
+        BeanUtils.copyProperties(fazenda, fazendaModel);
+        return repository.save(fazendaModel);
     }
 
 }

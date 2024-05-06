@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
@@ -46,7 +47,21 @@ public class FazendaController {
         if(fazenda == null){
             return ResponseEntity.notFound().build();
         }
+
+        return ResponseEntity.ok(fazenda);
+
+    }
+
+    // Edit one Fazenda by name
+    @PutMapping("/fazenda/{nome}")
+    public ResponseEntity<FazendaModel> putFazenda(@PathVariable String nome, @RequestBody @Valid FazendaRecord fazendaRecord){
         
+        var fazenda = service.editFazenda(nome, fazendaRecord);
+
+        if(fazenda == null){
+            return ResponseEntity.notFound().build();
+        }
+
         return ResponseEntity.ok(fazenda);
 
     }
