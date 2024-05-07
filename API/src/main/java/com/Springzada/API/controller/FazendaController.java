@@ -22,6 +22,8 @@ public class FazendaController {
     // Injection
     private FazendaService service;
 
+
+    // POST fazenda
     @PostMapping("/fazenda/create")
     public ResponseEntity<FazendaDTO> saveFazenda(@RequestBody @Valid FazendaDTO fazendaInput) {
         try {
@@ -31,6 +33,7 @@ public class FazendaController {
         }
     }
 
+    // GET ALL fazendas
     @GetMapping("/fazenda/all")
     public ResponseEntity<List<FazendaDTO>> getFazendas() {
         try {
@@ -40,6 +43,7 @@ public class FazendaController {
         }
     }
 
+    // GET ONE fazenda ( by name )
     @GetMapping("/fazenda/find/{nome}")
     public ResponseEntity<FazendaDTO> getFazenda(@PathVariable String nome) {
         try {
@@ -50,6 +54,7 @@ public class FazendaController {
         }
     }
 
+    // PUT fazenda ( by name )
     @PutMapping("/fazenda/edit/{nome}")
     public ResponseEntity<FazendaDTO> putFazenda(@PathVariable String nome, @RequestBody @Valid FazendaDTO fazendaRecord) {
         try {
@@ -60,6 +65,7 @@ public class FazendaController {
         }
     }
 
+    // DELETE fazenda ( by name )
     @DeleteMapping("/fazenda/delete/{nome}")
     public ResponseEntity<Object> deleteFazenda(@PathVariable String nome) {
         try {
