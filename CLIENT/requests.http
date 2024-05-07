@@ -5,7 +5,7 @@ content-type: application/json
     
     {
         "nome": "Santos",
-        "area": 50
+        "area": 30
     }
 
 ###
@@ -38,5 +38,5 @@ content-type: application/json
 
 // Delete Fazenda
 
-DELETE http://localhost:8080/fazenda/delete/Santos
+DELETE http://localhost:8080/fazenda/delete/Lurdes
 content-type: application/json
