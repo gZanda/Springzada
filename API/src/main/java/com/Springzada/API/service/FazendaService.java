@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.Springzada.API.model.FazendaModel;
 import com.Springzada.API.repository.FazendaRepository;
-import com.Springzada.API.dto.FazendaRecord;
+import com.Springzada.API.dto.FazendaRespDTO;
 import org.springframework.beans.BeanUtils;
 import java.util.List;
 
@@ -15,7 +15,7 @@ public class FazendaService {
     private FazendaRepository repository;
 
     // Create a new Fazenda
-    public FazendaModel saveFazenda(FazendaRecord fazenda) {
+    public FazendaModel saveFazenda(FazendaRespDTO fazenda) {
 
         var fazendaModel = new FazendaModel();
         BeanUtils.copyProperties(fazenda, fazendaModel);
@@ -24,9 +24,9 @@ public class FazendaService {
     }
 
     // Get all Fazendas
-    public List<FazendaModel> getFazendas() {
+    public List<FazendaRespDTO> getFazendas() {
 
-        return repository.findAll();
+        return repository.findAll().stream().map(fazenda -> new FazendaRespDTO(fazenda.getNome(), fazenda.getArea())).toList();
 
     }
 
@@ -38,7 +38,7 @@ public class FazendaService {
     }
 
     // Edit one Fazenda by name
-    public FazendaModel editFazenda(String nome, FazendaRecord fazenda) {
+    public FazendaModel editFazenda(String nome, FazendaRespDTO fazenda) {
 
         var fazendaModel = repository.findByNome(nome);
 
