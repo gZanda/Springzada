@@ -1,0 +1,42 @@
+// New Fazenda
+
+POST http://localhost:8080/fazenda/create
+content-type: application/json
+    
+    {
+        "nome": "Santos",
+        "area": 32
+    }
+
+###
+
+// Get All Fazendas
+
+GET http://localhost:8080/fazenda/all
+content-type: application/json
+
+###
+
+// Get One Fazenda by Name
+
+GET http://localhost:8080/fazenda/find/Santos
+content-type: application/json
+
+###
+
+// Update Fazenda
+
+PUT http://localhost:8080/fazenda/edit/Santos
+content-type: application/json
+
+    {
+        "nome": "Santos",
+        "area": 30
+    }
+
+###
+
+// Delete Fazenda
+
+DELETE http://localhost:8080/fazenda/delete/Santos
+content-type: application/json
