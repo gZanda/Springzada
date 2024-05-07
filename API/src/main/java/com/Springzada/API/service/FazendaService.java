@@ -50,4 +50,18 @@ public class FazendaService {
         return repository.save(fazendaModel);
     }
 
+    // Delete one Fazenda by name
+    public Boolean deleteFazenda(String nome) {
+
+        var fazendaModel = repository.findByNome(nome);
+
+        if (fazendaModel == null) {
+            return false;
+        }
+
+        repository.delete(fazendaModel);
+        return true;
+
+    }
+
 }
