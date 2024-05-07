@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.ResponseEntity;
-import com.Springzada.API.dto.FazendaRespDTO;
+import com.Springzada.API.dto.FazendaDTO;
 import com.Springzada.API.model.FazendaModel;
 
 
@@ -22,17 +22,17 @@ public class FazendaController {
     @Autowired
     private FazendaService service;
 
-    // Create a new Fazenda
+    // Create a new Fazenda --> DTO
     @PostMapping("/fazenda/create")
-    public ResponseEntity<FazendaModel> saveFazenda(@RequestBody @Valid FazendaRespDTO fazendaInput){
+    public ResponseEntity<FazendaDTO> saveFazenda(@RequestBody @Valid FazendaDTO fazendaInput){
 
         return ResponseEntity.created(null).body(service.saveFazenda(fazendaInput));
     
     }
 
-    // Get all Fazendas
+    // Get all Fazendas --> DTO
     @GetMapping("/fazenda/all")
-    public ResponseEntity<List<FazendaRespDTO>> getFazendas(){
+    public ResponseEntity<List<FazendaDTO>> getFazendas(){
 
         return ResponseEntity.ok(service.getFazendas());
         
@@ -49,7 +49,7 @@ public class FazendaController {
 
     // Edit one Fazenda by name
     @PutMapping("/fazenda/edit/{nome}")
-    public ResponseEntity<FazendaModel> putFazenda(@PathVariable String nome, @RequestBody @Valid FazendaRespDTO fazendaRecord){
+    public ResponseEntity<FazendaModel> putFazenda(@PathVariable String nome, @RequestBody @Valid FazendaDTO fazendaRecord){
         
         var fazenda = service.editFazenda(nome, fazendaRecord);
         return fazenda == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(fazenda);
