@@ -2,8 +2,8 @@ package com.Springzada.API.controller;
 
 import com.Springzada.API.service.FazendaService;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,10 +15,11 @@ import org.springframework.http.ResponseEntity;
 import com.Springzada.API.dto.FazendaDTO;
 import org.springframework.http.HttpStatus;
 
+@AllArgsConstructor
 @RestController
 public class FazendaController {
 
-    @Autowired
+    // Injection
     private FazendaService service;
 
     @PostMapping("/fazenda/create")

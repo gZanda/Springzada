@@ -1,17 +1,18 @@
 package com.Springzada.API.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.Springzada.API.model.FazendaModel;
 import com.Springzada.API.repository.FazendaRepository;
+import lombok.AllArgsConstructor;
 import com.Springzada.API.dto.FazendaDTO;
 import org.springframework.beans.BeanUtils;
 import java.util.List;
 
+@AllArgsConstructor
 @Service
 public class FazendaService {
 
-    @Autowired
+    // Injection
     private FazendaRepository repository;
 
     // Create a new Fazenda
