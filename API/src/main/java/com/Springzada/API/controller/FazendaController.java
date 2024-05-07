@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.ResponseEntity;
 import com.Springzada.API.dto.FazendaDTO;
-import com.Springzada.API.model.FazendaModel;
 
 
 @RestController
@@ -47,9 +46,9 @@ public class FazendaController {
 
     }
 
-    // Edit one Fazenda by name
+    // Edit one Fazenda by name --> DTO
     @PutMapping("/fazenda/edit/{nome}")
-    public ResponseEntity<FazendaModel> putFazenda(@PathVariable String nome, @RequestBody @Valid FazendaDTO fazendaRecord){
+    public ResponseEntity<FazendaDTO> putFazenda(@PathVariable String nome, @RequestBody @Valid FazendaDTO fazendaRecord){
         
         var fazenda = service.editFazenda(nome, fazendaRecord);
         return fazenda == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(fazenda);

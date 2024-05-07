@@ -17,11 +17,10 @@ public class FazendaService {
     // Create a new Fazenda
     public FazendaDTO saveFazenda(FazendaDTO fazenda) {
 
-        FazendaModel fazendaModel = new FazendaModel();
+        var fazendaModel = new FazendaModel();
         BeanUtils.copyProperties(fazenda, fazendaModel);
         repository.save(fazendaModel);
-        FazendaDTO savedFazendaDTO = new FazendaDTO(fazenda.nome(), fazenda.area());
-        return savedFazendaDTO;
+        return new FazendaDTO(fazenda.nome(), fazenda.area());
 
     }
 
@@ -42,7 +41,7 @@ public class FazendaService {
     }
 
     // Edit one Fazenda by name
-    public FazendaModel editFazenda(String nome, FazendaDTO fazenda) {
+    public FazendaDTO editFazenda(String nome, FazendaDTO fazenda) {
 
         var fazendaModel = repository.findByNome(nome);
 
@@ -51,7 +50,8 @@ public class FazendaService {
         }
 
         BeanUtils.copyProperties(fazenda, fazendaModel);
-        return repository.save(fazendaModel);
+        repository.save(fazendaModel);
+        return new FazendaDTO(fazendaModel.getNome(), fazendaModel.getArea());
     }
 
     // Delete one Fazenda by name
