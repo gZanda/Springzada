@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.Springzada.API.dto.FazendaRecord;
 import com.Springzada.API.model.FazendaModel;
@@ -25,9 +24,9 @@ public class FazendaController {
 
     // Create a new Fazenda
     @PostMapping("/fazenda/create")
-    public ResponseEntity<FazendaModel> saveFazenda(@RequestBody @Valid FazendaRecord fazendaRecord){
+    public ResponseEntity<FazendaModel> saveFazenda(@RequestBody @Valid FazendaRecord fazendaInput){
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.saveFazenda(fazendaRecord));
+        return ResponseEntity.created(null).body(service.saveFazenda(fazendaInput));
     
     }
 
@@ -35,7 +34,7 @@ public class FazendaController {
     @GetMapping("/fazenda/all")
     public ResponseEntity<List<FazendaModel>> getFazendas(){
 
-        return ResponseEntity.status(HttpStatus.OK).body(service.getFazendas());
+        return ResponseEntity.ok(service.getFazendas());
         
     } 
 
@@ -44,12 +43,7 @@ public class FazendaController {
     public ResponseEntity<FazendaModel> getFazenda(@PathVariable String nome){
 
         var fazenda = service.getFazenda(nome);
-
-        if(fazenda == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(fazenda);
+        return fazenda == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(fazenda);
 
     }
 
@@ -58,12 +52,7 @@ public class FazendaController {
     public ResponseEntity<FazendaModel> putFazenda(@PathVariable String nome, @RequestBody @Valid FazendaRecord fazendaRecord){
         
         var fazenda = service.editFazenda(nome, fazendaRecord);
-
-        if(fazenda == null){
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        }
-
-        return ResponseEntity.status(HttpStatus.OK).body(fazenda);
+        return fazenda == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(fazenda);
 
     }
 
@@ -71,13 +60,8 @@ public class FazendaController {
     @DeleteMapping("/fazenda/delete/{nome}")
     public ResponseEntity<Object> deleteFazenda(@PathVariable String nome){
 
-        var status =  service.deleteFazenda(nome);
-        
-        if(status){
-            return ResponseEntity.status(HttpStatus.OK).body("Fazenda deleted successfully.");
-        }
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        var status = service.deleteFazenda(nome);
+        return status == false ? ResponseEntity.notFound().build() : ResponseEntity.ok("Deleted successfully!");
 
     }
 

@@ -5,7 +5,7 @@ content-type: application/json
     
     {
         "nome": "Santos",
-        "area": 32
+        "area": 50
     }
 
 ###
