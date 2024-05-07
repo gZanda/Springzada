@@ -38,9 +38,9 @@ public class FazendaController {
         
     } 
 
-    // Get one Fazenda by name
+    // Get one Fazenda by name --> DTO
     @GetMapping("/fazenda/find/{nome}")
-    public ResponseEntity<FazendaModel> getFazenda(@PathVariable String nome){
+    public ResponseEntity<FazendaDTO> getFazenda(@PathVariable String nome){
 
         var fazenda = service.getFazenda(nome);
         return fazenda == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(fazenda);

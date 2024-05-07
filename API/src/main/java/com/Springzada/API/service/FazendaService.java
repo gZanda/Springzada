@@ -33,9 +33,11 @@ public class FazendaService {
     }
 
     // Get one Fazenda by name
-    public FazendaModel getFazenda(String nome) {
+    public FazendaDTO getFazenda(String nome) {
 
-        return repository.findByNome(nome);
+        var fazendaModel = repository.findByNome(nome);
+
+        return fazendaModel == null ? null : new FazendaDTO(fazendaModel.getNome(), fazendaModel.getArea());
         
     }
 
