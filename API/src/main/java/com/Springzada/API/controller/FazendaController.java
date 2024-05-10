@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.ResponseEntity;
 import com.Springzada.API.dto.FazendaDTO;
+import com.Springzada.API.exceptions.CustomException;
 
 @AllArgsConstructor
 @RestController
@@ -28,7 +29,10 @@ public class FazendaController {
     public ResponseEntity<FazendaDTO> saveFazenda(@RequestBody @Valid FazendaDTO fazendaInput) {
 
         var fazenda = service.saveFazenda(fazendaInput);
-        return fazenda == null ? ResponseEntity.badRequest().build() : ResponseEntity.created(null).body(fazenda);
+        if( fazenda == null ){
+            throw new CustomException("This Fazenda Name Already Exists");
+        }
+        return ResponseEntity.ok(fazenda);
 
     }
 
