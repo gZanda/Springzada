@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.ResponseEntity;
 import com.Springzada.API.dto.FazendaDTO;
-import org.springframework.http.HttpStatus;
 
 @AllArgsConstructor
 @RestController
@@ -26,53 +25,43 @@ public class FazendaController {
     // POST fazenda
     @PostMapping("/fazenda/create")
     public ResponseEntity<FazendaDTO> saveFazenda(@RequestBody @Valid FazendaDTO fazendaInput) {
-        try {
-            return ResponseEntity.created(null).body(service.saveFazenda(fazendaInput));
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+
+        return ResponseEntity.created(null).body(service.saveFazenda(fazendaInput));
+
     }
 
     // GET ALL fazendas
     @GetMapping("/fazenda/all")
     public ResponseEntity<List<FazendaDTO>> getFazendas() {
-        try {
-            return ResponseEntity.ok(service.getFazendas());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+
+        return ResponseEntity.ok(service.getFazendas());
+
     }
 
     // GET ONE fazenda ( by name )
     @GetMapping("/fazenda/find/{nome}")
     public ResponseEntity<FazendaDTO> getFazenda(@PathVariable String nome) {
-        try {
-            var fazenda = service.getFazenda(nome);
-            return fazenda == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(fazenda);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+
+        var fazenda = service.getFazenda(nome);
+        return fazenda == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(fazenda);
+
     }
 
     // PUT fazenda ( by name )
     @PutMapping("/fazenda/edit/{nome}")
     public ResponseEntity<FazendaDTO> putFazenda(@PathVariable String nome, @RequestBody @Valid FazendaDTO fazendaRecord) {
-        try {
-            var fazenda = service.editFazenda(nome, fazendaRecord);
-            return fazenda == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(fazenda);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+
+        var fazenda = service.editFazenda(nome, fazendaRecord);
+        return fazenda == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(fazenda);
+
     }
 
     // DELETE fazenda ( by name )
     @DeleteMapping("/fazenda/delete/{nome}")
     public ResponseEntity<Object> deleteFazenda(@PathVariable String nome) {
-        try {
-            var status = service.deleteFazenda(nome);
-            return status == false ? ResponseEntity.notFound().build() : ResponseEntity.ok("Deleted successfully!");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e);
-        }
+
+        var status = service.deleteFazenda(nome);
+        return status == false ? ResponseEntity.notFound().build() : ResponseEntity.ok("Deleted successfully!");
+
     }
 }
