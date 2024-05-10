@@ -41,7 +41,6 @@ public class FazendaService {
     public FazendaDTO getFazenda(String nome) {
 
         var fazendaModel = repository.findByNome(nome);
-
         return fazendaModel == null ? null : new FazendaDTO(fazendaModel.getNome(), fazendaModel.getProprietario(), fazendaModel.getArea(), fazendaModel.getImage());
         
     }
@@ -50,7 +49,6 @@ public class FazendaService {
     public FazendaDTO editFazenda(String nome, FazendaDTO fazenda) {
 
         var fazendaModel = repository.findByNome(nome);
-
         if (fazendaModel == null) {
             return null;
         }
@@ -64,11 +62,10 @@ public class FazendaService {
     public Boolean deleteFazenda(String nome) {
 
         var fazendaModel = repository.findByNome(nome);
-
         if (fazendaModel == null) {
             return false;
         }
-
+        
         repository.delete(fazendaModel);
         return true;
 

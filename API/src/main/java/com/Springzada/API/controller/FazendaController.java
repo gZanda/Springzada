@@ -11,18 +11,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.http.ResponseEntity;
 import com.Springzada.API.dto.FazendaDTO;
 
 @AllArgsConstructor
 @RestController
+@RequestMapping("/fazenda")
 public class FazendaController {
 
     // Injection
     private FazendaService service;
 
     // POST fazenda
-    @PostMapping("/fazenda/create")
+    @PostMapping("/create")
     public ResponseEntity<FazendaDTO> saveFazenda(@RequestBody @Valid FazendaDTO fazendaInput) {
 
         var fazenda = service.saveFazenda(fazendaInput);
@@ -31,7 +33,7 @@ public class FazendaController {
     }
 
     // GET ALL fazendas
-    @GetMapping("/fazenda/all")
+    @GetMapping("/all")
     public ResponseEntity<List<FazendaDTO>> getFazendas() {
 
         return ResponseEntity.ok(service.getFazendas());
@@ -39,7 +41,7 @@ public class FazendaController {
     }
 
     // GET ONE fazenda ( by name )
-    @GetMapping("/fazenda/find/{nome}")
+    @GetMapping("/find/{nome}")
     public ResponseEntity<FazendaDTO> getFazenda(@PathVariable String nome) {
 
         var fazenda = service.getFazenda(nome);
@@ -48,7 +50,7 @@ public class FazendaController {
     }
 
     // PUT fazenda ( by name )
-    @PutMapping("/fazenda/edit/{nome}")
+    @PutMapping("/edit/{nome}")
     public ResponseEntity<FazendaDTO> putFazenda(@PathVariable String nome, @RequestBody @Valid FazendaDTO fazendaRecord) {
 
         var fazenda = service.editFazenda(nome, fazendaRecord);
@@ -57,7 +59,7 @@ public class FazendaController {
     }
 
     // DELETE fazenda ( by name )
-    @DeleteMapping("/fazenda/delete/{nome}")
+    @DeleteMapping("/delete/{nome}")
     public ResponseEntity<Object> deleteFazenda(@PathVariable String nome) {
 
         var status = service.deleteFazenda(nome);
