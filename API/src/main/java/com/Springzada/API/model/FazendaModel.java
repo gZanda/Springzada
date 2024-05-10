@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 public class FazendaModel{
 
     @Id
+    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -31,9 +32,10 @@ public class FazendaModel{
     private String proprietario;
 
     @NotNull
+    @Column(nullable = false)
     private float area;
 
-    // Optional Image URL
+    @Column(nullable = true)
     private String image;
 
 }
