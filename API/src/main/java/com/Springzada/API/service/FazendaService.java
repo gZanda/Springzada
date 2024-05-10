@@ -21,14 +21,14 @@ public class FazendaService {
         var fazendaModel = new FazendaModel();
         BeanUtils.copyProperties(fazenda, fazendaModel);
         repository.save(fazendaModel);
-        return new FazendaDTO(fazenda.nome(), fazenda.area());
+        return new FazendaDTO( fazenda.nome(), fazenda.proprietario(), fazenda.area(), fazenda.image());
 
     }
 
     // Get all Fazendas
     public List<FazendaDTO> getFazendas() {
 
-        return repository.findAll().stream().map(fazenda -> new FazendaDTO(fazenda.getNome(), fazenda.getArea())).toList();
+        return repository.findAll().stream().map(fazenda -> new FazendaDTO(fazenda.getNome(), fazenda.getProprietario(), fazenda.getArea(), fazenda.getImage())).toList();
 
     }
 
@@ -37,7 +37,7 @@ public class FazendaService {
 
         var fazendaModel = repository.findByNome(nome);
 
-        return fazendaModel == null ? null : new FazendaDTO(fazendaModel.getNome(), fazendaModel.getArea());
+        return fazendaModel == null ? null : new FazendaDTO(fazendaModel.getNome(), fazendaModel.getProprietario(), fazendaModel.getArea(), fazendaModel.getImage());
         
     }
 
@@ -52,7 +52,7 @@ public class FazendaService {
 
         BeanUtils.copyProperties(fazenda, fazendaModel);
         repository.save(fazendaModel);
-        return new FazendaDTO(fazendaModel.getNome(), fazendaModel.getArea());
+        return new FazendaDTO(fazendaModel.getNome(), fazendaModel.getProprietario(), fazendaModel.getArea(), fazendaModel.getImage());
     }
 
     // Delete one Fazenda by name

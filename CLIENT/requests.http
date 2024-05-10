@@ -5,7 +5,9 @@ content-type: application/json
     
     {
         "nome": "Santos",
-        "area": 30
+        "proprietario": "Pedro Pascal",
+        "area": 20,
+        "image": "https://imagem_fazenda"
     }
 
 ###
@@ -31,12 +33,13 @@ content-type: application/json
 
     {
         "nome": "Santos",
-        "area": 30
+        "area": 30,
+        "proprietario": "Pedro Pascal"
     }
 
 ###
 
 // Delete Fazenda
 
-DELETE http://localhost:8080/fazenda/delete/Lurdes
+DELETE http://localhost:8080/fazenda/delete/Alos
 content-type: application/json
