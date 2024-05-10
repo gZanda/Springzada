@@ -21,12 +21,12 @@ public class FazendaController {
     // Injection
     private FazendaService service;
 
-
     // POST fazenda
     @PostMapping("/fazenda/create")
     public ResponseEntity<FazendaDTO> saveFazenda(@RequestBody @Valid FazendaDTO fazendaInput) {
 
-        return ResponseEntity.created(null).body(service.saveFazenda(fazendaInput));
+        var fazenda = service.saveFazenda(fazendaInput);
+        return fazenda == null ? ResponseEntity.badRequest().build() : ResponseEntity.created(null).body(fazenda);
 
     }
 

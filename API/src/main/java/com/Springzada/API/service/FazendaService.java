@@ -18,6 +18,11 @@ public class FazendaService {
     // Create a new Fazenda
     public FazendaDTO saveFazenda(FazendaDTO fazenda) {
 
+        
+        if (repository.findByNome(fazenda.nome()) != null) {
+            return null;
+        }
+
         var fazendaModel = new FazendaModel();
         BeanUtils.copyProperties(fazenda, fazendaModel);
         repository.save(fazendaModel);
