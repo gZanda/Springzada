@@ -9,10 +9,10 @@ spring:
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
 
-  # JPA CONFIGURATION
+  # JPA CONFIGURATION 
   jpa:
     hibernate:
-      ddl-auto: update # Allow jpa to create tables
+      ddl-auto: none # Allow jpa to create tables
     properties:
       hibernate:
         jdbc:
