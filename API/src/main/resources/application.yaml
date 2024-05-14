@@ -1,0 +1,20 @@
+# APPLICATION PROPERTIES FILE
+
+# DATABASE CONFIGURATION
+spring:
+  application:
+    name: API
+  datasource:
+    url: ${DATABASE_URL}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+
+  # JPA CONFIGURATION
+  jpa:
+    hibernate:
+      ddl-auto: update # Allow jpa to create tables
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true # No logs 
